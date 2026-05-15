@@ -1,0 +1,150 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  background: #f0f4f1;
+  color: #1a2e22;
+}
+
+.pagina {
+  max-width: 520px;
+  margin: 0 auto;
+  padding: 2rem 1.25rem 3rem;
+}
+
+.encabezado {
+  margin-bottom: 1.5rem;
+}
+
+.etiqueta {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #2d6a4f;
+  margin: 0 0 0.5rem;
+}
+
+h1 {
+  margin: 0 0 0.35rem;
+  font-size: 1.65rem;
+}
+
+.subtitulo {
+  margin: 0;
+  color: #4a5d52;
+  font-size: 0.95rem;
+  line-height: 1.45;
+}
+
+.formulario {
+  background: #fff;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+}
+
+label {
+  display: block;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+label .ayuda {
+  display: block;
+  font-weight: 400;
+  font-size: 0.75rem;
+  color: #6b7c72;
+  margin-top: 0.15rem;
+}
+
+.req {
+  color: #c1121f;
+}
+
+input,
+select,
+textarea {
+  display: block;
+  width: 100%;
+  margin-top: 0.35rem;
+  padding: 0.65rem 0.75rem;
+  border: 1px solid #c5d4cb;
+  border-radius: 8px;
+  font: inherit;
+  font-weight: 400;
+}
+
+fieldset.opcional {
+  border: 1px dashed #c5d4cb;
+  border-radius: 8px;
+  padding: 0.75rem 1rem 0.25rem;
+  margin: 0 0 1rem;
+}
+
+fieldset.opcional legend {
+  font-size: 0.85rem;
+  color: #4a5d52;
+  padding: 0 0.25rem;
+}
+
+button[type="submit"] {
+  width: 100%;
+  padding: 0.85rem;
+  background: #2d6a4f;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+button[type="submit"]:hover {
+  background: #1b4332;
+}
+
+button[type="submit"]:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+.mensaje {
+  margin-top: 1rem;
+  padding: 0.75rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+}
+
+.mensaje.ok {
+  background: #d8f3dc;
+  color: #1b4332;
+}
+
+.mensaje.error {
+  background: #ffe5e5;
+  color: #9b2226;
+}
+
+.pie {
+  margin-top: 1.5rem;
+  font-size: 0.8rem;
+  color: #6b7c72;
+  text-align: center;
+}
+
+.cargando {
+  color: #4a5d52;
+  font-size: 0.95rem;
+  margin: 0 0 1rem;
+}
+
+label span {
+  display: block;
+  margin-bottom: 0.35rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+}

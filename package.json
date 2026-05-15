@@ -1,0 +1,12 @@
+{
+  "name": "crm-envigado-piloto",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Piloto EspoCRM + formulario de reportes ambientales",
+  "scripts": {
+    "start": "node scripts/generate-config.js && powershell -NoProfile -ExecutionPolicy Bypass -File ./iniciar-crm.ps1",
+    "stop": "powershell -NoProfile -ExecutionPolicy Bypass -Command \"$env:Path = 'C:\\Program Files\\Docker\\Docker\\resources\\bin;C:\\Program Files\\Docker\\cli-plugins;' + $env:Path; docker compose down\"",
+    "restart": "npm run stop && npm start",
+    "logs": "powershell -NoProfile -ExecutionPolicy Bypass -Command \"$env:Path = 'C:\\Program Files\\Docker\\Docker\\resources\\bin;C:\\Program Files\\Docker\\cli-plugins;' + $env:Path; docker compose logs -f\""
+  }
+}

@@ -1,0 +1,78 @@
+================================================================================
+  CÓMO CREAR UN CASO — CRM y formulario (piloto Envigado)
+================================================================================
+
+ANTES DE TODO
+  - Docker Desktop abierto
+  - Ejecutar: iniciar-crm.ps1  (o docker compose up -d)
+  - CRM: http://localhost:8080   usuario admin / admin_local_2026
+  - Formulario: http://localhost:8082  (después de configurar API Key)
+
+
+--------------------------------------------------------------------------------
+A) CREAR UN CASO DESDE EL CRM (pantalla web)
+--------------------------------------------------------------------------------
+
+1. Entra a http://localhost:8080 e inicia sesión.
+
+2. Busca "Cases" o "Casos" en el menú.
+   Si no lo ves: clic en el menú ☰ o en el botón + (crear).
+
+3. Clic en "Create Case" / "Crear caso".
+
+4. Llena al menos:
+   - Name / Nombre     → Ej: "Maltrato animal - Barrio El Dorado"
+   - Description       → Qué pasó
+   - Status            → New / Nuevo (suele venir por defecto)
+
+5. Clic en "Save" / "Guardar".
+
+6. Verificar en pgAdmin (opcional):
+   - Base espocrm → Schemas → public → Tables → "case"
+   - Ver datos → debe aparecer una fila nueva.
+
+
+--------------------------------------------------------------------------------
+B) CREAR UN CASO DESDE EL FORMULARIO (ciudadano)
+--------------------------------------------------------------------------------
+
+PASO 1 — Crear la "llave" (API User) en el CRM (solo una vez)
+
+1. En el CRM: Administración (⋮ arriba a la derecha).
+
+2. API Users → Create API User.
+
+3. Nombre: Formulario web
+   Rol: puede ser un rol con permiso de crear Cases (o Admin en piloto).
+
+4. Guardar. Copia la "API Key" que te muestra (solo se ve bien al crear).
+
+5. En tu PC, abre el archivo:
+   crmEspo\public\js\config.js
+
+6. Sustituye PEGA_AQUI_TU_API_KEY por la clave copiada. Guarda el archivo.
+
+PASO 2 — Abrir el formulario
+
+1. Asegúrate de que Docker esté corriendo (iniciar-crm.ps1).
+
+2. Navegador: http://localhost:8082
+
+3. Llena el formulario y "Enviar reporte".
+
+4. En el CRM: Cases / Casos → debe aparecer el caso nuevo
+   (nombre empieza con "Reporte: ...").
+
+5. En pgAdmin: misma tabla "case", otra fila más.
+
+
+--------------------------------------------------------------------------------
+SI ALGO FALLA
+--------------------------------------------------------------------------------
+
+- Formulario dice "Falta API Key" → editar public\js\config.js
+- No conecta → Docker encendido, ejecutar iniciar-crm.ps1 otra vez
+- CRM no abre → http://localhost:8080
+- Formulario no abre → http://localhost:8082
+
+================================================================================
