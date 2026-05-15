@@ -1,0 +1,87 @@
+================================================================================
+  SÍ — HAY QUE CREARLO EN EL CRM (NO EN pgAdmin / base de datos a mano)
+================================================================================
+
+El formulario web LEE los campos que defines en EspoCRM.
+Las opciones del desplegable "Tipo de caso" también se definen EN EL CRM.
+
+NO edites tablas en PostgreSQL para esto.
+
+================================================================================
+  PASO 1 — CREAR EL CAMPO "tipoCaso" EN EL CRM
+================================================================================
+
+1. http://localhost:8080 → login admin
+
+2. Administración (menú arriba)
+
+3. Entity Manager
+
+4. Busca "Case" → clic en Case
+
+5. Pestaña "Fields" → botón "Add Field"
+
+6. Configura ASÍ:
+
+   Type:        Enum
+   Name:        tipoCaso          (exacto, sin espacios)
+   Label:       Tipo de caso
+   Required:    SÍ (recomendado)
+   Options:     una opción por línea, por ejemplo:
+
+                Contaminación
+                Fauna silvestre
+                Maltrato animal
+                Ruido
+                Otro
+
+7. Save
+
+================================================================================
+  PASO 2 — PONER LAS OPCIONES (LISTA DESPLEGABLE)
+================================================================================
+
+SÍ — LAS OPCIONES SE PONEN EN EL MISMO CAMPO, EN EL CRM:
+
+   Entity Manager → Case → Fields → tipoCaso → Edit
+
+   En "Options" escribe cada valor en una línea.
+   El texto debe coincidir EXACTO con .env, por ejemplo:
+
+   Contaminación     ← igual que ASIGNACION_VALOR_CONTAMINACION
+
+   Save
+
+   Después de cambiar opciones: F5 en el formulario http://localhost:8082
+
+================================================================================
+  PASO 3 — MOSTRAR EL CAMPO AL CREAR CASOS EN EL CRM (opcional pero útil)
+================================================================================
+
+   Entity Manager → Case → Layouts → Edit (layout editar)
+
+   Arrastra "Tipo de caso" al formulario → Save
+
+================================================================================
+  PASO 4 — PROBAR EL FORMULARIO WEB
+================================================================================
+
+   F5 en http://localhost:8082
+
+   Debe aparecer "Tipo Caso" o "Tipo de caso" como lista desplegable.
+
+   Si NO aparece:
+   - Confirma que el Name del campo es tipoCaso (paso 1)
+   - Revisa que Docker y npm start estén activos
+   - Limpia caché del navegador (Ctrl+F5)
+
+================================================================================
+  RESUMEN
+================================================================================
+
+   ¿Crear en CRM?              SÍ
+   ¿Poner opciones en CRM?    SÍ (en el campo Enum)
+   ¿Editar PostgreSQL?         NO
+   ¿Asignación contaminación?  Solo si eligen "Contaminación" (igual texto)
+
+================================================================================

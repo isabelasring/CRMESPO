@@ -1,0 +1,59 @@
+================================================================================
+  CORREO DE CONFIRMACIÓN AL CIUDADANO (EspoCRM gratis)
+================================================================================
+
+Cuando alguien envía el formulario:
+  1. Se crea el caso en el CRM
+  2. Se envía un correo: "Hemos recibido su reporte..."
+
+--------------------------------------------------------------------------------
+PASO 1 — Campo correo en el CRM (una vez)
+--------------------------------------------------------------------------------
+Administración → Entity Manager → Case → Fields → Add Field
+  Type: Email (o Varchar)
+  Name: emailReportante
+  Label: Correo del reportante
+  Save
+
+Layouts → Edit → arrastra "Correo del reportante" → Save
+
+--------------------------------------------------------------------------------
+PASO 2 — Cuenta de correo saliente en el CRM (obligatorio)
+--------------------------------------------------------------------------------
+Administración → Outbound Emails (o Email Accounts / Group Email)
+  Gmail:
+    Host: smtp.gmail.com
+    Puerto: 465 + SSL  (o 587 + TLS)
+    Usuario: tu_correo@gmail.com (completo)
+    Contraseña: CONTRASEÑA DE APLICACIÓN (16 letras), NO la clave de Gmail
+  Cómo obtenerla: cuenta Google → Seguridad → Verificación en 2 pasos ON
+    → Contraseñas de aplicaciones → Correo → generar → copiar sin espacios
+  Marca como cuenta por defecto para envío → Save
+
+EMAIL_FROM en .env debe ser EXACTAMENTE el mismo correo que el usuario SMTP.
+
+Sin esto el caso se crea pero el correo falla con "invalidCredentials".
+
+--------------------------------------------------------------------------------
+PASO 3 — Permisos del API User
+--------------------------------------------------------------------------------
+El rol del usuario "Formulario web" debe poder:
+  - Cases: create
+  - Email: create
+
+--------------------------------------------------------------------------------
+PASO 4 — Archivo .env
+--------------------------------------------------------------------------------
+EMAIL_FROM=el_mismo_correo_de_la_cuenta_smtp@...
+EMAIL_FROM_NAME=Secretaria de Medio Ambiente Envigado
+CAMPO_EMAIL_CIUDADANO=emailReportante
+
+Luego: npm start
+
+--------------------------------------------------------------------------------
+PASO 5 — Probar
+--------------------------------------------------------------------------------
+http://localhost:8082 → enviar con tu correo real
+Revisa bandeja (y spam)
+
+================================================================================

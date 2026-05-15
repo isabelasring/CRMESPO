@@ -38,9 +38,24 @@ if (!apiKey) {
   process.exit(1);
 }
 
+const asignaciones = [];
+if (env.ASIGNACION_USER_ID_CONTAMINACION) {
+  asignaciones.push({
+    campo: env.ASIGNACION_CAMPO_TIPO || "tipoCaso",
+    valor: env.ASIGNACION_VALOR_CONTAMINACION || "Contaminación",
+    assignedUserId: env.ASIGNACION_USER_ID_CONTAMINACION,
+    emailFuncionario: env.ASIGNACION_EMAIL_CONTAMINACION || "",
+    nombreFuncionario: env.ASIGNACION_NOMBRE_CONTAMINACION || "",
+  });
+}
+
 const content = `// Generado desde .env
 window.CRM_CONFIG = {
   apiKey: ${JSON.stringify(apiKey)},
+  emailFrom: ${JSON.stringify(env.EMAIL_FROM || "")},
+  emailFromName: ${JSON.stringify(env.EMAIL_FROM_NAME || "CRM Envigado")},
+  campoEmailCiudadano: ${JSON.stringify(env.CAMPO_EMAIL_CIUDADANO || "emailReportante")},
+  asignaciones: ${JSON.stringify(asignaciones)},
 };
 `;
 

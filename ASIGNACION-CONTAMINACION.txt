@@ -1,0 +1,65 @@
+================================================================================
+  ASIGNAR CASOS DE CONTAMINACIÓN A UN FUNCIONARIO (formulario web)
+================================================================================
+
+Cuando en el formulario eligen tipo "Contaminación":
+  1. El caso queda asignado a ese usuario en el CRM
+  2. Le llega un correo de aviso (si configuró el email en .env)
+
+--------------------------------------------------------------------------------
+PASO 1 — Crear el usuario en el CRM
+--------------------------------------------------------------------------------
+Administración → Users → Create User
+
+  User Name:     contaminacion   (o el que prefieran)
+  Name:          Funcionario Contaminación
+  Email:         correo REAL del funcionario (donde recibirá avisos)
+  Password:      una clave segura
+  Roles:         un rol con acceso a Cases (no hace falta Admin)
+  Is Active:     sí
+
+Save
+
+--------------------------------------------------------------------------------
+PASO 2 — Copiar el ID del usuario
+--------------------------------------------------------------------------------
+Abra el usuario que creó → Edit (o View)
+
+En la barra del navegador verá una URL como:
+  http://localhost:8080/#User/view/65f1a2b3c4d5e6f7g
+
+El ID es la parte final: 65f1a2b3c4d5e6f7g
+Cópielo.
+
+--------------------------------------------------------------------------------
+PASO 3 — Valor exacto del tipo de caso
+--------------------------------------------------------------------------------
+En Entity Manager → Case → Fields → tipoCaso → Options
+
+El texto debe coincidir EXACTO con lo del formulario, por ejemplo:
+  Contaminación
+
+Ese mismo texto va en .env como ASIGNACION_VALOR_CONTAMINACION
+
+--------------------------------------------------------------------------------
+PASO 4 — Archivo .env (en la carpeta del proyecto)
+--------------------------------------------------------------------------------
+ASIGNACION_CAMPO_TIPO=tipoCaso
+ASIGNACION_VALOR_CONTAMINACION=Contaminación
+ASIGNACION_USER_ID_CONTAMINACION=pegue_aqui_el_id_del_paso_2
+ASIGNACION_EMAIL_CONTAMINACION=correo_del_funcionario@...
+ASIGNACION_NOMBRE_CONTAMINACION=Nombre del funcionario
+
+Luego en PowerShell:
+  cd ruta\crmEspo
+  npm start
+
+--------------------------------------------------------------------------------
+PASO 5 — Probar
+--------------------------------------------------------------------------------
+http://localhost:8082
+  - Envíe un caso con tipo Contaminación
+  - En el CRM el caso debe mostrar "Assigned User" = ese funcionario
+  - El funcionario debe recibir el correo (revise spam)
+
+================================================================================
